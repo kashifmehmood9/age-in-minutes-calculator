@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">age calculator</string>
+    <string name="enter_your_date_of_birth_below_to_calculate_your_age_in_minutes">Enter your date of birth below to calculate your age in minutes.</string>
+    <string name="select_age_button">Select age</string>
+    <string name="selected_age">Selected Age:</string>
+    <string name="your_age_in_minutes">Your age in minutes:</string>
+</resources>
