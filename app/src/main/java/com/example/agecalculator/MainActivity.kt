@@ -1,18 +1,10 @@
 package com.example.agecalculator
 
 import android.app.DatePickerDialog
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.Duration
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,29 +23,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun makeDatePickerDialog() {
-        val calender = Calendar.getInstance()
+    private fun makeDatePickerDialog() {
+        val calender = Calendar.getInstance(Locale.ENGLISH)
 
         val dialog = DatePickerDialog(
             this,
-            { _, year, month, day ->
-                val selectedDate = "0$day/0${month + 1}/$year"
-
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-                val date = dateFormat.parse(selectedDate)
-                selectedAgeTextView?.text = "$date"
-                ageInMinutesTextView?.text = "${(System.currentTimeMillis() - date.time) / 60000}"
-
+            { datePicker, year, month, day ->
+                DateCalculator().calculateDate(day, month, year)
             },
             calender.get(Calendar.YEAR),
             calender.get(Calendar.MONTH),
             calender.get(Calendar.DAY_OF_MONTH)
         )
-
         dialog.datePicker.maxDate = System.currentTimeMillis()
-
         dialog.show()
-
     }
 }
